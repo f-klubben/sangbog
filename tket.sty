@@ -1,0 +1,24 @@
+%% TAAGEKAMMER-hack starts
+\newlength\@rbll
+\def\rbl#1#2{%
+        \settowidth{\@rbll}{\hbox{#2}}%
+        #2\kern-#1\@rbll#2}
+\newcommand\TK{\mbox{\ttfamily
+    \raisebox{-0.4pt}{T}%
+    \rbl{.95}{\AA}G%
+    \rotatebox{-8}{E}%
+    \raisebox{-0.6pt}{K}%
+    $\,\!$%
+    \raisebox{0.2pt}{\rbl{.94}{A}}%
+    $\,\!$%
+    \raisebox{-0.6pt}{M}%
+    \rotatebox{8}{\rbl{.94}{M}}%
+    ER\hspace{1pt}}}%
+\newcommand\TKET{\mbox{\TK\kern-1pt\raisebox{.6pt}{\ttfamily ET}\kern1pt}}
+\newcommand\TKETS{\mbox{\TKET\kern-2pt\raisebox{-0.5pt}{\ttfamily S}}}
+\DeclareTextCommandDefault{\textellipsis}{%
+   .\kern\fontdimen3\font
+   .\kern\fontdimen3\font
+   .}
+%% TAAGEKAMMER-hack ends
+

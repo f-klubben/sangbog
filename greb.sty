@@ -1,0 +1,17 @@
+\setlength\unitlength{.235mm}
+\def\crc(#1,#2){\put(#1,#2){$\circ$}}
+\def\crs(#1,#2){\put(#1,#2){$\times$}}
+\def\stg(#1){\put(35,#1){\oval(50,6)[t]}}
+
+\newenvironment{guitar}[1]
+{\thinlines \begin{picture}(60,95)\newcount\kor \kor=10\loop
+\put(\kor,0){\line(0,60){60}}
+\ifnum\kor<60 \advance\kor by 10 \repeat
+\kor=0\loop\put(10,\kor){\line(50,0){50}}
+\ifnum\kor<45 \advance\kor by 15 \repeat
+\thicklines \put(10,60){\line(50,0){50}}
+\put(12,75){\framebox(46,15){\becifstyle #1}}}
+{\end{picture}}
+
+\def\dt(#1,#2){\put(#1,#2){\prik}}
+\newcommand{\prik}{\circle*{4}}
