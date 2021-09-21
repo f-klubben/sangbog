@@ -7,7 +7,7 @@ Latex Environment
 -------------
 For apt systems:
 1. In a shell
-  - `git clone https://github.com/f-klubben/stregsystemet.git`
+  - `git clone https://github.com/f-klubben/sangbog.git`
 2. Install needed packages:
   - `sudo apt install texlive-latex-extra psutils texlive-lang-european`
 3. Build the sangbog
