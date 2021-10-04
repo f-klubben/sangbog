@@ -24,6 +24,8 @@ jobs:
       - name: Compile the document
         run: |
           latex main.tex
+          makeindex main
+          latex main.tex
           dvips main.dvi
           sh ./ps2book.sh main.ps
           ps2pdf main_book.ps sangbog.pdf
