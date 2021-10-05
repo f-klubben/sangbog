@@ -7,12 +7,13 @@ all: dvi
 
 dvi:
 	latex $(FILE)
+	makeindex main
+	latex $(FILE)
 
 ps: dvi
 	dvips $(DVIFILE)
 
 pdf: dvi
-	makeindex main
 	dvipdf -ta4 $(DVIFILE)
 
 booklet: ps
