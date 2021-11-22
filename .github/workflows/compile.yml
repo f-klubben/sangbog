@@ -1,0 +1,49 @@
+name: LaTeX build
+
+on:
+  push:
+    tags:
+      - "*"
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: texlive/texlive:latest
+    steps:
+      - name: Install prerequisites
+        run: apt-get update && apt-get install -y ghostscript
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Compile the document
+        run: |
+          latex main.tex
+          makeindex main
+          latex main.tex
+          dvips main.dvi
+          dvipdf main.dvi kontinuerlig.pdf
+          sh ./ps2book.sh main.ps
+          ps2pdf main_book.ps sangbog.pdf
+      - name: Upload songbook (booklet)
+        uses: actions/upload-artifact@v2
+        with:
+          name: Sangbog
+          path: sangbog.pdf
+      - name: Upload songbook (continuous)
+        uses: actions/upload-artifact@v2
+        with:
+          name: Kontinuerlig
+          path: kontinuerlig.pdf
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            sangbog.pdf
+            kontinuerlig.pdf
