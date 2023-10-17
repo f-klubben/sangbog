@@ -60,7 +60,7 @@
    }%
 }
 \newcounter{verscnt}
-\newcounter{sangcnt}\setcounter{sangcnt}{0}
+\newcounter{sangcnt}\setcounter{sangcnt}{-1}
 
 \def\@sangtitel#1#2{%
     \begingroup\raggedright\interlinepenalty=10000
@@ -84,7 +84,7 @@
               \addpenalty{-300}%
               \stepcounter{sangcnt}
               \index{#1}%
-              \setcounter{verscnt}{0}%
+              \setcounter{verscnt}{-1}%
               \@lastversdoublefalse
               \@fulberthack{#1}
               \@sangtitel{#1}{#2}%
