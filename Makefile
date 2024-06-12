@@ -11,7 +11,7 @@ dvi:
 	latex $(FILE)
 
 ps: dvi
-	dvips $(DVIFILE)
+	dvips -t a4 $(DVIFILE)
 
 pdf: dvi
 	dvipdf $(DVIFILE)
