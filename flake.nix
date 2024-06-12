@@ -34,15 +34,7 @@
         };
         packages.${system} = {
             default = booklet; 
-            pdf = pdf;pkgs.stdenv.mkDerivation {
-                name = "F-klubbens sangbog pdf";
-                src = ./.;
-                nativeBuildInputs = deps;
-                installPhase = ''
-                    ${pkgs.gnumake}/bin/make pdf
-                    mv main_book.pdf $out
-                '';
-            };
+            pdf = pdf;
             #for ubuntu wsl
             defaultPackage.${system} = booklet;
         };
