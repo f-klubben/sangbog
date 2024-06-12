@@ -23,7 +23,7 @@ For Debian-based systems (in other distributions package names may vary):
 
 Building using nix
 -------------
-For nix based systems:
+For nix based systems with flakes enabled:
 1. Fetch the source code
   ```sh 
   git clone https://github.com/f-klubben/sangbog.git
