@@ -11,10 +11,10 @@ dvi:
 	latex $(FILE)
 
 ps: dvi
-	dvips -t a4 $(DVIFILE)
+	dvips $(DVIFILE)
 
 pdf: dvi
-	dvipdf $(DVIFILE)
+	dvipdf -sPAPERSIZE=a4 $(DVIFILE)
 
 booklet: ps
 	./ps2book.sh $(PSFILE)
