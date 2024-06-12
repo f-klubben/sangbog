@@ -21,6 +21,7 @@
         pdf = pkgs.stdenv.mkDerivation {
             name = "F-klubbens sangbog continuous";
             src = ./.;
+            nativeBuildInputs = deps;
             installPhase = ''
                 ${pkgs.gnumake}/bin/make pdf
                 mv main_book.pdf $out
@@ -32,11 +33,20 @@
         devShells.${system}.default = pkgs.mkShell {
             packages = deps;
         };
+
         packages.${system} = {
             default = booklet; 
             pdf = pdf;
             #for ubuntu wsl
-            defaultPackage.${system} = booklet;
+            build = pkgs.writeScriptBin "build-sangbog" ''
+                if [[ "$1" == "" ]]; then
+                    target="booklet"
+                else
+                    target="$1"
+                fi
+                ${pkgs.gnumake}/bin/make $target
+
+            '';
         };
 
     };
