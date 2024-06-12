@@ -28,11 +28,13 @@ For nix based systems:
   ```sh 
   git clone https://github.com/f-klubben/sangbog.git
   ```
-2. Build the pdf
+2. Enter environment
 ```sh
-  nix build
-  #or 
-  nix build .#pdf
+  nix develop
+```
+3. Build pdf
+```sh
+   make booklet
 ```
 
 Adding new songs
