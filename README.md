@@ -21,6 +21,20 @@ For Debian-based systems (in other distributions package names may vary):
 3. Build the sangbog
   `make booklet` for booklet format, `make pdf` for non-booklet (continuous) format
 
+Building using nix
+-------------
+For nix based systems:
+1. Fetch the source code
+  ```sh 
+  git clone https://github.com/f-klubben/sangbog.git
+  ```
+2. Build the pdf
+```sh
+  nix build
+  #or 
+  nix build .#pdf
+```
+
 Adding new songs
 -------------
 Songs are stored in `/sange` so the process of adding a new song is
