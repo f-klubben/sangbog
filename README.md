@@ -36,6 +36,7 @@ nix develop
 ```sh
 make booklet
 ```
+Or build and run the latest version locally: `nix run github:f-klubben/sangbog`
 
 Adding new songs
 -------------
