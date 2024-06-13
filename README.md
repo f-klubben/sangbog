@@ -25,16 +25,16 @@ Building using nix
 -------------
 For nix based systems with flakes enabled:
 1. Fetch the source code
-  ```sh 
-  git clone https://github.com/f-klubben/sangbog.git
-  ```
+```sh 
+git clone https://github.com/f-klubben/sangbog.git
+```
 2. Enter environment
 ```sh
-  nix develop
+nix develop
 ```
 3. Build pdf
 ```sh
-   make booklet
+make booklet
 ```
 
 Adding new songs
