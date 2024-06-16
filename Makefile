@@ -14,7 +14,7 @@ ps: dvi
 	dvips $(DVIFILE)
 
 pdf: dvi
-	dvipdf -ta4 $(DVIFILE)
+	dvipdf -sPAPERSIZE=a4 $(DVIFILE)
 
 booklet: ps
 	./ps2book.sh $(PSFILE)
