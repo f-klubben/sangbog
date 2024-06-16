@@ -28,8 +28,8 @@
             installPhase = ''
                 mkdir -p $out/{bin,share}
                 ${pkgs.gnumake}/bin/make pdf
-                mv main_book.pdf $out/share
-                echo "${pkgs.xdg-utils}/bin/xdg-open $out/share/main_book.pdf" > $out/bin/${builtins.replaceStrings [" "] ["-"] name}
+                mv main.pdf $out/share
+                echo "${pkgs.xdg-utils}/bin/xdg-open $out/share/main.pdf" > $out/bin/${builtins.replaceStrings [" "] ["-"] name}
                 chmod +x $out/bin/${builtins.replaceStrings [" "] ["-"] name}
             '';
 
