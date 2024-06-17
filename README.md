@@ -27,6 +27,28 @@ sudo apt install texlive-latex-extra psutils texlive-lang-european ghostscript
 
 ## Adding new songs
 
+
+=======
+Building using nix
+-------------
+For nix based systems with flakes enabled:
+1. Fetch the source code
+```sh 
+git clone https://github.com/f-klubben/sangbog.git
+```
+2. Enter environment
+```sh
+nix develop
+```
+3. Build pdf
+```sh
+make booklet
+```
+Or build and run the latest version locally: `nix run github:f-klubben/sangbog`
+
+Adding new songs
+-------------
+
 Songs are stored in `/sange` so the process of adding a new song is
 
 1. `touch ./sange/[songname].tex`
