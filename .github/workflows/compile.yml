@@ -14,17 +14,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: texlive/texlive:latest
     steps:
       - name: Install prerequisites
-        run: sudo apt-get install -y texlive-latex-extra ghostscript psutils
+        run: apt-get update && apt-get install -y ghostscript
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Compile the document
         run: |
-          make pdf
-          make booklet
-          mv main.pdf kontinuerlig.pdf
-          mv main_book.pdf sangbog.pdf
+          latex main.tex
+          makeindex main
+          latex main.tex
+          dvips main.dvi
+          dvipdf main.dvi kontinuerlig.pdf
+          sh ./ps2book.sh main.ps
+          ps2pdf main_book.ps sangbog.pdf
       - name: Upload songbook (booklet)
         uses: actions/upload-artifact@v2
         with:
