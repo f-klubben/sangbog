@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install prerequisites
-        run: sudo apt-get install -y texlive-latex-extra ghostscript psutils
+        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra ghostscript psutils
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Compile the document
