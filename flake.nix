@@ -15,8 +15,8 @@
             nativeBuildInputs = deps;
             installPhase = ''
                 mkdir -p $out/{bin,share}
-                ${pkgs.gnumake}/bin/make booklet
-                mv output/booklet.pdf $out/share
+                ${pkgs.gnumake}/bin/make bookletpdf
+                mv output/booklet/main.pdf $out/share
 +                echo "${pkgs.xdg-utils}/bin/xdg-open $out/share/booklet.pdf" > $out/bin/${builtins.replaceStrings [" "] ["-"] name}
                 chmod +x $out/bin/${builtins.replaceStrings [" "] ["-"] name}
             '';
