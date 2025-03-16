@@ -16,8 +16,8 @@
             installPhase = ''
                 mkdir -p $out/{bin,share}
                 ${pkgs.gnumake}/bin/make booklet
-                mv main_book.pdf $out/share
-                echo "${pkgs.xdg-utils}/bin/xdg-open $out/share/main_book.pdf" > $out/bin/${builtins.replaceStrings [" "] ["-"] name}
+                mv output/booklet.pdf $out/share
++                echo "${pkgs.xdg-utils}/bin/xdg-open $out/share/booklet.pdf" > $out/bin/${builtins.replaceStrings [" "] ["-"] name}
                 chmod +x $out/bin/${builtins.replaceStrings [" "] ["-"] name}
             '';
         };
@@ -27,10 +27,9 @@
             nativeBuildInputs = deps;
             installPhase = ''
                 mkdir -p $out/{bin,share}
-                ${pkgs.gnumake}/bin/make pdf
-                mv main.pdf $out/share
-                echo "${pkgs.xdg-utils}/bin/xdg-open $out/share/main.pdf" > $out/bin/${builtins.replaceStrings [" "] ["-"] name}
-                chmod +x $out/bin/${builtins.replaceStrings [" "] ["-"] name}
+                ${pkgs.gnumake}/bin/make kontinuert
++                mv output/kontinuert.pdf $out/share
++                echo "${pkgs.xdg-utils}/bin/xdg-open $out/share/kontinuert.pdf" > $out/bin/${builtins.replaceStrings [" "] ["-"] name}
             '';
 
         };

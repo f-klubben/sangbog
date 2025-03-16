@@ -1,29 +1,4 @@
-main_book.pdf
-main.aux
-main.idx
-main.log
-main.ind
-main.dvi
-main.ilg
-main.pdf
-
-kontinuert.pdf
-kontinuert.aux
-kontinuert.idx
-kontinuert.log
-kontinuert.ind
-kontinuert.dvi
-kontinuert.ilg
-kontinuert.pdf
-
-booklet.pdf
-booklet.aux
-booklet.idx
-booklet.log
-booklet.ind
-booklet.dvi
-booklet.ilg
-booklet.pdf
+output/
 
 # nix
 result
