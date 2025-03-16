@@ -7,5 +7,23 @@ main.dvi
 main.ilg
 main.pdf
 
+kontinuert.pdf
+kontinuert.aux
+kontinuert.idx
+kontinuert.log
+kontinuert.ind
+kontinuert.dvi
+kontinuert.ilg
+kontinuert.pdf
+
+booklet.pdf
+booklet.aux
+booklet.idx
+booklet.log
+booklet.ind
+booklet.dvi
+booklet.ilg
+booklet.pdf
+
 # nix
 result

@@ -1,0 +1,49 @@
+\documentclass[danish]{russb}
+\usepackage{babel,scale,greb}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage{lucidabr}
+\usepackage{makeidx}
+\usepackage{moreverb}
+\usepackage{epsfig}
+\usepackage{eufrak}
+\usepackage{mathrsfs}
+\usepackage{tket}
+\usepackage{textcomp} 
+\usepackage{soul}
+\usepackage{geometry}
+\renewcommand\becifstyle{\normalfont\small}
+%\makeindex
+
+
+\geometry{a5paper, twopage, inner=2cm, outer=1cm, top=2cm, bottom=2cm}
+
+%%%% Det følgende er en del af et stort hack som er nødvendigt i
+%%%% Alfa-beta-gamma-sangen
+
+\usepackage{color}
+\usepackage{calc}
+
+\def\dollars{\fontfamily{cmr}\selectfont\textdollaroldstyle}
+
+\newcommand{\leftchar}[1]{%
+  \setbox0=\hbox{#1}%
+  \hbox to .5\wd0{\copy0\hskip-.5\wd0%
+    {\color{white}\rule[-\dp0]{.5\wd0}{\ht0+\dp0}}}%
+  }
+
+\newcommand{\rightchar}[1]{%
+  \setbox0=\hbox{#1}%
+  \llap{\hskip-.5\wd0\copy0\hskip-\wd0%
+    {\color{white}\rule[-\dp0]{.5\wd0}{\ht0+\dp0}}}%
+  \hbox to .5\wd0{}}
+
+%%%% Slut på grimt hack.
+
+% Til placering af tegneserier. Uhyggeligt grimt, men det virker...
+\newenvironment{cartoons}{}{\vspace{-9.5mm}}
+\newcommand\cartoon[4]{
+\begin{picture}(0,0)
+\put(#2,-#3){\epsfig{file=#1,height=#4cm}}
+\end{picture}\hspace{-0.86mm}
+}

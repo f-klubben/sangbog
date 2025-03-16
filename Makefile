@@ -1,23 +1,34 @@
-FILE=main.tex
-DVIFILE=main.dvi
-PSFILE=main.ps
-PSBOOKFILE=main_book.ps
+OUTPUT_DIR = output
+FILE_KONTINUERT = kontinuert.tex
+FILE_BOOKLET = booklet.tex
+DVI_FILE_KONTINUERT = $(OUTPUT_DIR)/kontinuert.dvi
+DVI_FILE_BOOKLET = $(OUTPUT_DIR)/booklet.dvi
 
-all: dvi
+all: dvi_kontinuert dvi_booklet
 
-dvi:
-	latex $(FILE)
-	makeindex main
-	latex $(FILE)
+dvi_kontinuert: 
+	mkdir -p $(OUTPUT_DIR)
+	latex -output-directory=$(OUTPUT_DIR) $(FILE_KONTINUERT)
+	makeindex $(OUTPUT_DIR)/kontinuert
+	latex -output-directory=$(OUTPUT_DIR) $(FILE_KONTINUERT)
 
-ps: dvi
-	dvips $(DVIFILE)
+dvi_booklet:
+	mkdir -p $(OUTPUT_DIR)
+	latex -output-directory=$(OUTPUT_DIR) $(FILE_BOOKLET)
+	makeindex $(OUTPUT_DIR)/booklet
+	latex -output-directory=$(OUTPUT_DIR) $(FILE_BOOKLET)
 
-pdf: dvi
-	dvipdf -sPAPERSIZE=a4 $(DVIFILE)
+kontinuert: dvi_kontinuert
+	@echo "Compiling .dvi to .pdf with A4 paper size"
+	mkdir -p $(OUTPUT_DIR)
+	dvipdfmx -p a4 -o $(OUTPUT_DIR)/kontinuert.pdf $(DVI_FILE_KONTINUERT)
+	@echo "PDF should be generated in the $(OUTPUT_DIR) directory: $(OUTPUT_DIR)/kontinuert.pdf"
 
-booklet: ps
-	./ps2book.sh $(PSFILE)
-	ps2pdf $(PSBOOKFILE)
-	rm $(PSFILE) $(PSBOOKFILE) $(DVIFILE)
+booklet: dvi_booklet
+	@echo "Compiling .dvi to .pdf with A5 paper size"
+	mkdir -p $(OUTPUT_DIR)
+	dvipdfmx -p a5 -o $(OUTPUT_DIR)/booklet.pdf $(DVI_FILE_BOOKLET)
+	@echo "PDF should be generated in the $(OUTPUT_DIR) directory: $(OUTPUT_DIR)/booklet.pdf"
 
+clean:
+	rm -rf $(OUTPUT_DIR) *.aux *.log *.idx *.ilg *.ind *.toc *.out *.dvi *.ps *.pdf
