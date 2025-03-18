@@ -17,7 +17,7 @@
                 mkdir -p $out/{bin,share}
                 ${pkgs.gnumake}/bin/make bookletpdf
                 mv output/booklet/main.pdf $out/share
-+                echo "${pkgs.xdg-utils}/bin/xdg-open $out/share/booklet.pdf" > $out/bin/${builtins.replaceStrings [" "] ["-"] name}
+                echo "${pkgs.xdg-utils}/bin/xdg-open $out/share/booklet.pdf" > $out/bin/${builtins.replaceStrings [" "] ["-"] name}
                 chmod +x $out/bin/${builtins.replaceStrings [" "] ["-"] name}
             '';
         };
@@ -28,8 +28,8 @@
             installPhase = ''
                 mkdir -p $out/{bin,share}
                 ${pkgs.gnumake}/bin/make kontinuert
-+                mv output/kontinuert.pdf $out/share
-+                echo "${pkgs.xdg-utils}/bin/xdg-open $out/share/kontinuert.pdf" > $out/bin/${builtins.replaceStrings [" "] ["-"] name}
+                mv output/kontinuert.pdf $out/share
+                echo "${pkgs.xdg-utils}/bin/xdg-open $out/share/kontinuert.pdf" > $out/bin/${builtins.replaceStrings [" "] ["-"] name}
             '';
 
         };
