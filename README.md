@@ -16,10 +16,10 @@ For Debian-based systems (in other distributions package names may vary):
   ```
 2. Install prerequisites:
   ```sh
-  sudo apt install texlive-latex-extra psutils texlive-lang-european ghostscript
+  sudo apt install texlive-latex-extra texlive-lang-european
   ```
 3. Build the sangbog
-  `make booklet` for booklet format, `make pdf` for non-booklet (continuous) format
+  `make kontinuertpdf` for non-booklet (continuous) format, `make bookletpdf` for booklet format
 
 Building using nix
 -------------
@@ -34,7 +34,7 @@ nix develop
 ```
 3. Build pdf
 ```sh
-make booklet
+make bookletpdf
 ```
 Or build and run the latest version locally: `nix run github:f-klubben/sangbog`
 
