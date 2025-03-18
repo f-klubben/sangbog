@@ -9,7 +9,7 @@ dvi_kontinuert:
 	mkdir -p $(OUTPUT_DIR)
 	mkdir -p $(OUTPUT_DIR)/kontinuert
 	latex -output-directory=$(OUTPUT_DIR)/kontinuert $(FILE_KONTINUERT)
-	makeindex $(OUTPUT_DIR)/kontinuert
+	makeindex $(OUTPUT_DIR)/kontinuert/main.idx
 	latex -output-directory=$(OUTPUT_DIR)/kontinuert $(FILE_KONTINUERT)
 
 kontinuert: dvi_kontinuert
@@ -23,7 +23,6 @@ bookletpdf:
 	if ! test -f $(OUTPUT_DIR)/kontinuert.pdf; then make kontinuert; fi
 	@echo "Compiling .dvi to .pdf with A5 paper size"
 	mkdir -p $(OUTPUT_DIR)
-	makeindex $(OUTPUT_DIR)/booklet
 	pdflatex -output-directory=$(OUTPUT_DIR)/booklet $(FILE_BOOKLET)
 	@echo "PDF should be generated in the $(OUTPUT_DIR) directory: $(OUTPUT_DIR)/booklet.pdf"
 
