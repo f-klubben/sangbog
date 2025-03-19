@@ -16,15 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install prerequisites
-        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra ghostscript psutils
+        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Compile the document
         run: |
-          make pdf
-          make booklet
-          mv main.pdf kontinuerlig.pdf
-          mv main_book.pdf sangbog.pdf
+          make
+          mv output/kontinuerlig/kontinuerlig.pdf kontinuerlig.pdf
+          mv output/booklet/booklet.pdf sangbog.pdf
       - name: Upload songbook (booklet)
         uses: actions/upload-artifact@v2
         with:

@@ -1,0 +1,24 @@
+% src dir is parent
+
+\include{booklet/preamble}
+
+%\documentclass[a4paper]{article}
+
+%\usepackage{pdfpages}
+
+\begin{document}
+
+%\include{body}
+% https://tex.stackexchange.com/a/126792
+\includepdf[pages={1-61},        % include all original pages
+            nup=2x1,        % place two pages on a row
+            %noautoscale,    % keep original page dimensions, otherwise they will scale to fit new page
+            %frame,          % draw a frame around every original page
+            signature=64,   % organize pages in ~~8~~ 64 pages booklets
+            landscape,      % new page will be landscape 
+            angle=0,      % 0 for normal vendign af sider, 180 for japansk
+            delta=0 1cm     % introduces some separation between pages. If you don't need it, delete it.
+            ]{output/kontinuert/kontinuert} % Document
+
+\end{document}
+
