@@ -54,13 +54,24 @@
 \def\@defchar#1{%                         % Definerer en karakter til et
    \bgroup                                % eller andet.
       \uccode`\~\expandafter`\csname\string#1\endcsname%
-      \uppercase{%                        % Definitionen træder i kraft
-   \egroup                                % når karakteren bliver aktiv
+      \uppercase{%                        % Definitionen trï¿½der i kraft
+   \egroup                                % nï¿½r karakteren bliver aktiv
       \def~%                              %
    }%
 }
 \newcounter{verscnt}
 \newcounter{sangcnt}\setcounter{sangcnt}{-1}
+
+\newcommand{\newsongprefix}{} % standard: ingen prefix
+
+% Opdater \thesangcnt for at inkludere prefix
+\renewcommand{\thesangcnt}{\newsongprefix\arabic{sangcnt}}
+
+% Kommando for at skifte indekseringsformat
+\newcommand{\switchsongindex}[1]{%
+    \renewcommand{\newsongprefix}{#1} % Saet ny prefix
+    \setcounter{sangcnt}{-1} % Nulstil sangtaeller
+}
 
 \def\@sangtitel#1#2{%
     \begingroup\raggedright\interlinepenalty=10000
@@ -165,8 +176,8 @@
 \def\@nvers#1{%
    \bgroup                                % eller andet.
       \uccode`\~`\^^M%
-      \uppercase{%                        % Definitionen træder i kraft
-   \egroup                                % når karakteren bliver aktiv
+      \uppercase{%                        % Definitionen trï¿½der i kraft
+   \egroup                                % nï¿½r karakteren bliver aktiv
       \def~{\par\penalty#1\hangafter=1\hangindent=1.5em\noindent\ignorespaces}%
                 }%
    \catcode`\^^M=\active\@xnvers
@@ -279,9 +290,9 @@
 \def\sloppycols{\setcounter{columnbadness}{10001}\aftergroup\fussycols}
 \def\fussycols{\setcounter{columnbadness}{0}}
 \parskip=0pt\raggedbottom
-%% 25/4-2004 har Rasmus Villemoes udkommenteret de næste par linjer og
-%% erstattet dem med de efterfølgende lignende linjer. Forskellen
-%% skulle gerne blive, at der også kommer sidetal med i index'et.
+%% 25/4-2004 har Rasmus Villemoes udkommenteret de nï¿½ste par linjer og
+%% erstattet dem med de efterfï¿½lgende lignende linjer. Forskellen
+%% skulle gerne blive, at der ogsï¿½ kommer sidetal med i index'et.
 
 %\def\@wrindex#1{%
 %  \protected@write\@indexfile{}%
@@ -307,7 +318,7 @@
 \renewenvironment{theindex}
     {\let\item\@idxitem
      {\Large\bfseries\sffamily\noindent Indholdsfortegnelse\par}%
-     %% Den næste linje er ligeledes indsat 25/4-04 for at der kommer en
+     %% Den nï¿½ste linje er ligeledes indsat 25/4-04 for at der kommer en
      %% forklaring med
 %     {\vspace{\baselineskip}\noindent Tallene i (\textbf{parentes}) angiver sidetal.\par}%
      \begingroup\setlength\multicolsep{1.25\baselineskip}%
