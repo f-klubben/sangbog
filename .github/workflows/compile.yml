@@ -2,42 +2,41 @@ name: LaTeX build
 
 on:
   push:
-    tags:
-      - "*"
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Install prerequisites
-        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra
+        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-xetex latexmk
+      
       - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Compile the document
+        uses: actions/checkout@v4
+      
+      - name: Compile the documents
         run: |
-          make
-          mv output/kontinuerlig/kontinuerlig.pdf kontinuerlig.pdf
-          mv output/booklet/booklet.pdf sangbog.pdf
+          make kontinuertpdf
+          make bookletpdf
+      
       - name: Upload songbook (booklet)
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: Sangbog
-          path: sangbog.pdf
+          path: output/booklet/booklet.pdf
+      
       - name: Upload songbook (continuous)
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
-          name: Kontinuerlig
-          path: kontinuerlig.pdf
+          name: Kontinuert
+          path: output/kontinuert/kontinuert.pdf
+      
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            sangbog.pdf
-            kontinuerlig.pdf
+            output/booklet/booklet.pdf
+            output/kontinuert/kontinuert.pdf
+
