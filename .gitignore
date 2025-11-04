@@ -2,3 +2,6 @@ output/
 
 # nix
 result
+
+# build script
+songs.json
