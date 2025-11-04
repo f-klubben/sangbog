@@ -2,7 +2,8 @@ name: Generate and Upload songs.json
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - '**'
   release:
     types: [published, created, edited]
 
