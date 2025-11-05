@@ -112,20 +112,21 @@ if __name__ == "__main__":
 
     song_count = len(songs)
     count = 0
-    for songpath in songs:
+    for song_path in songs:
         count +=1
         percent = (count/song_count)*100
         sys.stdout.write("\rGenerating songbook %d%%" % (percent))
         sys.stdout.flush()
-        contents = get_file_contents(songpath)
+        contents = get_file_contents(song_path)
         song_info = get_song_info(contents)
         print(song_info)
-        song_body = generate_song(song_info, songpath, contents, counter)
+        song_body = generate_song(song_info, song_path, contents, counter)
         if song_body:
             json_res[counter.last] = {
                 "title": song_info[0],
                 "melody": song_info[1],
-                "body": song_body
+                "body": song_body,
+                "path": song_path,
             }
 
     print("\n\rWriting to json")
