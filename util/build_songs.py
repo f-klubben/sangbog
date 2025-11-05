@@ -1,26 +1,16 @@
 import os
-import zipfile
 import re
 import json
 import sys
-from urllib.request import urlretrieve
-from string import Template
 from pathlib import Path
 
 CWD = Path.cwd()
-ARCHIVE_PATH = Path(".").joinpath("sangbog-main.zip")
 JSON_PATH = CWD.joinpath("songs.json")
 
 ### EXTRACTING PART ###
-def get_songbook(file_path):
-    url = 'https://github.com/f-klubben/sangbog/archive/master.zip'
-    urlretrieve(url, file_path)
-    print("")
-    return file_path
-
-def get_file_contents(archive, path):
+def get_file_contents(path):
     contents = ""
-    with archive.open(path, mode="r") as data:
+    with open(path, mode="r") as data:
         contents = data.read()
     return contents
 
@@ -65,7 +55,7 @@ def get_song_order(content):
         res.append(match.group(2))
     return res
 
-def generate_song(song_info, file_name, contents, counter, archive):
+def generate_song(song_info, file_name, contents, counter):
     if song_info == None:
         return []
     body_list = merge_lists(
@@ -98,35 +88,32 @@ class Counter:
 
 if __name__ == "__main__":
     json_res = {}
-    if (not ARCHIVE_PATH.exists()):
-        get_songbook(ARCHIVE_PATH)
-    with zipfile.ZipFile(ARCHIVE_PATH, mode="r") as archive:
-        c = get_file_contents(archive, "sangbog-main/booklet/main.tex").decode('UTF-8')
-        counter = Counter(get_song_order(c))
-        songs = list(filter(
-            lambda x: x.filename.startswith("sangbog-main/sange") and not x.is_dir(),
-            archive.infolist())
-        )
-        song_count = len(songs)
-        count = 0
-        for info in songs:
-            count +=1
-            percent = (count/song_count)*100
-            sys.stdout.write("\rGenerating songbook %d%%" % (percent))
-            sys.stdout.flush()
-            contents = get_file_contents(archive, info.filename).decode('UTF-8')
-            song_info = get_song_info(contents)
-            print(song_info)
-            song_body = generate_song(song_info, info.filename, contents, counter, archive)
-            if song_body:
-                json_res[counter.last] = {
-                    "title": song_info[0],
-                    "melody": song_info[1],
-                    "body": song_body
-                }
+    c = get_file_contents("booklet/main.tex")
+    counter = Counter(get_song_order(c))
+    songs = [
+        os.path.join("sange", f)
+        for f in os.listdir("sange")
+        if os.path.isfile(os.path.join("sange", f))
+    ]
+
+    song_count = len(songs)
+    count = 0
+    for songpath in songs:
+        count +=1
+        percent = (count/song_count)*100
+        sys.stdout.write("\rGenerating songbook %d%%" % (percent))
+        sys.stdout.flush()
+        contents = get_file_contents(songpath)
+        song_info = get_song_info(contents)
+        print(song_info)
+        song_body = generate_song(song_info, songpath, contents, counter)
+        if song_body:
+            json_res[counter.last] = {
+                "title": song_info[0],
+                "melody": song_info[1],
+                "body": song_body
+            }
 
     print("\n\rWriting to json")
     with open(JSON_PATH, encoding="utf-8", mode="w") as f:
         f.write(json.dumps(json_res, ensure_ascii=False))
-    print("\rRemoving archive")
-    CWD.joinpath(ARCHIVE_PATH).unlink()
