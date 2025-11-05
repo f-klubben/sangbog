@@ -2,6 +2,7 @@ import os
 import re
 import json
 import sys
+import base64
 from pathlib import Path
 
 CWD = Path.cwd()
@@ -13,6 +14,18 @@ def get_file_contents(path):
     with open(path, mode="r") as data:
         contents = data.read()
     return contents
+
+def encode_image(image_path: str) -> str:
+    img_string = ""
+    with open(image_path, 'rb') as image_file:
+        # Read the image file's binary data
+        image_bytes = image_file.read()
+
+        # Encode the bytes using Base64
+        base64_bytes = base64.b64encode(image_bytes)
+        img_string = base64_bytes.decode("utf-8")
+    return img_string
+
 
 def get_song_info(content):
     reg = re.compile(r"\\begin\{sang\}\{([^\}]*)\}\{([^\}]*)\}")
@@ -44,7 +57,8 @@ def get_images(content):
     res = []
     for match in matches.finditer(content):
         start = content[0:match.start()].count("\n")
-        res.append((start, "i", match.group(1),match.group(2).replace(".eps", ".png")))
+        image_path = match.group(2).replace(".eps", ".png")
+        res.append((start, "i", match.group(1), image_path, encode_image(image_path)))
     return res
 
 def get_song_order(content):
