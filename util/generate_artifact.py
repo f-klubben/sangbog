@@ -101,7 +101,7 @@ class Counter:
         return self.last
 
 if __name__ == "__main__":
-    json_res = {}
+    json_res = []
     c = get_file_contents("booklet/main.tex")
     counter = Counter(get_song_order(c))
     songs = [
@@ -122,13 +122,13 @@ if __name__ == "__main__":
         print(song_info)
         song_body = generate_song(song_info, song_path, contents, counter)
         if song_body:
-            json_res[counter.last] = {
+            json_res.append({
+                "number": counter.last,
                 "title": song_info[0],
                 "melody": song_info[1],
                 "body": song_body,
                 "path": song_path,
-                "number": counter.last,
-            }
+            })
 
     print("\n\rWriting to json")
     with open(JSON_PATH, encoding="utf-8", mode="w") as f:
