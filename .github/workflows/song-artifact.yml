@@ -23,7 +23,7 @@ jobs:
           python-version: '3.13'
 
       - name: Run Python script to generate songs.json
-        run: python util/build_songs.py
+        run: python util/generate_artifact.py
 
       - name: Verify songs.json exists
         run: |
