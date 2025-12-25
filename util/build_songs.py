@@ -127,6 +127,7 @@ if __name__ == "__main__":
                 "melody": song_info[1],
                 "body": song_body,
                 "path": song_path,
+                "number": counter.last,
             }
 
     print("\n\rWriting to json")
