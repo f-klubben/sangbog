@@ -19,7 +19,7 @@ For Debian-based systems (in other distributions package names may vary):
   sudo apt install texlive-latex-extra texlive-lang-european
   ```
   ```sh
-  sudo pacman -S texlive-latex texlive-latexextra texlive-langeuropean texlive-fontsrecommended texlive-plaingeneric libpaper; echo "a4" | sudo tee /etc/papersize
+  sudo pacman -S texlive-latex texlive-latexextra texlive-langeuropean texlive-fontsrecommended texlive-plaingeneric
   ```
 3. Build the sangbog
   `make kontinuertpdf` for non-booklet (continuous) format, `make bookletpdf` for booklet format
