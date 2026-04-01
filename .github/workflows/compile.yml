@@ -47,4 +47,3 @@ jobs:
           files: |
             output/booklet/booklet.pdf
             output/kontinuert/kontinuert.pdf
-
