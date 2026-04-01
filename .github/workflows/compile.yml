@@ -29,19 +29,19 @@ jobs:
           make bookletpdf
       
       - name: Upload songbook (booklet)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Sangbog
           path: output/booklet/booklet.pdf
       
       - name: Upload songbook (continuous)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Kontinuert
           path: output/kontinuert/kontinuert.pdf
       
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'release'
         with:
           files: |
