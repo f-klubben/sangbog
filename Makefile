@@ -28,7 +28,7 @@ bookletpdf:
 	if ! test -f $(PDF_FILE_KONTINUERT); then $(MAKE) kontinuertpdf; fi
 	@echo "Generating booklet from kontinuert PDF"
 	mkdir -p $(OUTPUT_DIR)/booklet
-	python3 booklet.py $(PDF_FILE_KONTINUERT) $(PDF_FILE_BOOKLET)
+	python3 generate_booklet.py $(PDF_FILE_KONTINUERT) $(PDF_FILE_BOOKLET)
 	@echo "PDF generated at $(PDF_FILE_BOOKLET)"
  
 clean:
