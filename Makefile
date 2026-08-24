@@ -14,6 +14,8 @@ dvi:
 	makeindex $(OUTPUT_DIR)/kontinuert/main.idx
 	latex -output-directory=$(OUTPUT_DIR)/kontinuert $(FILE_KONTINUERT)
 
+# WARNING: IF YOU CHANGE THE FODLER STRUCTURE HERE; YOU NEED TO CHANGE THE FODLER STRUCUTRE IN THE CI/CD
+
 kontinuertpdf:
 	@echo "Compiling .dvi to .pdf with A4 paper size"
 	mkdir -p $(OUTPUT_DIR)/kontinuert

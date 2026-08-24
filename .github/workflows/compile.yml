@@ -24,6 +24,13 @@ jobs:
             - name: Build PDFs
               run: make all
 
+            - name: Flatten output
+              run: |
+                  mkdir -p dist
+                  cp output/booklet/booklet.pdf dist/
+                  cp output/kontinuert/kontinuert.pdf dist/
+
+
             - name: Upload PDFs for PR inspection
               if: github.event_name == 'pull_request'
               uses: actions/upload-artifact@v4
