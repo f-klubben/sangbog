@@ -30,6 +30,14 @@ bookletpdf:
 	mkdir -p $(OUTPUT_DIR)/booklet
 	python3 generate_booklet.py $(PDF_FILE_KONTINUERT) $(PDF_FILE_BOOKLET)
 	@echo "PDF generated at $(PDF_FILE_BOOKLET)"
+
+# OLD BOOKLET CREATION USING LATEX
+#bookletpdf:
+#	if ! test -f $(PDF_FILE_KONTINUERT); then $(MAKE) kontinuertpdf; fi
+#	@echo "Compiling .dvi to .pdf with A4 paper size"
+#	mkdir -p $(OUTPUT_DIR)/booklet
+#	pdflatex -output-directory=$(OUTPUT_DIR)/booklet -jobname=booklet $(FILE_BOOKLET)
+#	@echo "PDF generated at $(OUTPUT_DIR)/booklet/booklet.pdf"
  
 clean:
 	rm -rf $(OUTPUT_DIR) *.aux *.log *.idx *.ilg *.ind *.toc *.out *.dvi *.ps *.pdf
