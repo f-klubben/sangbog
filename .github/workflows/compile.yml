@@ -24,6 +24,15 @@ jobs:
             - name: Build PDFs
               run: make all
 
+            - name: Upload PDFs for PR inspection
+              if: github.event_name == 'pull_request'
+              uses: actions/upload-artifact@v4
+              with:
+                  name: pr-${{ github.event.pull_request.number }}-pdfs
+                  path: |
+                      output/booklet/booklet.pdf
+                      output/kontinuert/kontinuert.pdf
+
             - name: Attach PDFs to release
               uses: softprops/action-gh-release@v2
               if: github.event_name == 'release'
