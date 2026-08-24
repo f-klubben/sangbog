@@ -1,43 +1,45 @@
-name: LaTeX build
+name: Latex Build
 
 on:
-  push:
-    branches:
-      - '**'
-  workflow_dispatch:
+    pull_request:
+    release:
+        types: [published]
+    workflow_dispatch:
+
+permissions:
+    contents: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install prerequisites
-        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-xetex latexmk
-      
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      
-      - name: Compile the documents
-        run: |
-          make kontinuertpdf
-          make bookletpdf
-      
-      - name: Upload songbook (booklet)
-        uses: actions/upload-artifact@v4
-        with:
-          name: Sangbog
-          path: output/booklet/booklet.pdf
-      
-      - name: Upload songbook (continuous)
-        uses: actions/upload-artifact@v4
-        with:
-          name: Kontinuert
-          path: output/kontinuert/kontinuert.pdf
-      
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: |
-            output/booklet/booklet.pdf
-            output/kontinuert/kontinuert.pdf
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Install TeX Live
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y texlive-latex-extra texlive-xetex latexmk
+
+            - name: Build PDFs
+              run: make all
+
+            - name: Flatten output
+              run: |
+                  mkdir -p dist
+                  cp output/booklet/booklet.pdf dist/
+                  cp output/kontinuert/kontinuert.pdf dist/
+ 
+            - name: Upload PDFs for PR inspection
+              if: github.event_name == 'pull_request'
+              uses: actions/upload-artifact@v4
+              with:
+                  name: pr-${{ github.event.pull_request.number }}-pdfs
+                  path: dist/*.pdf
+ 
+            - name: Attach PDFs to release
+              uses: softprops/action-gh-release@v2
+              if: github.event_name == 'release'
+              with:
+                  files: dist/*.pdf
 
