@@ -1,0 +1,52 @@
+name: Generate and Upload songs.json
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+  release:
+    types: [published, created, edited]
+
+jobs:
+  generate-and-upload:
+    name: Generate songs.json and upload artifact
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Run Python script to generate songs.json
+        run: python util/generate_artifact.py
+
+      - name: Verify songs.json exists
+        run: |
+          if [ ! -f songs.json ]; then
+            echo "❌ songs.json not found!"
+            exit 1
+          fi
+          echo "✅ songs.json generated successfully."
+
+      # Upload artifact on every commit/push
+      - name: Upload songs.json as artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: songs-json-${{ github.run_number }}
+          path: songs.json
+          retention-days: 30
+
+      # Attach songs.json to release
+      - name: Upload songs.json to release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: songs.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
