@@ -1,5 +1,7 @@
 # F-Klubbens sangbog skreven i Typst
 
+A continuation of the old LaTeX sangbog](https://github.com/f-klubben/originalsangbog)
+
 ## Req.
 
 - typst 0.14.2
