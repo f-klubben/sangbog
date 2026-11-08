@@ -1,6 +1,6 @@
 #import "//template.typ": *
 
-#sang("Alle dat'er er glade for porter", subtext: "Topholt, Vincent, Benjamin, Lorenzen - Mel: Alle sømænd er glade for piger", cols: 2)[
+#sang("Alle dat'er er glade for porter", subtext: "Topholt, Vincent, Benjamin, Lorenzen, 2025 - Mel: Alle sømænd er glade for piger", cols: 2)[
   #vers[
     Alle Dat'er er glade for porter \
     men min flask' du kan stole på mig \
