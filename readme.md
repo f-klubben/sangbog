@@ -1,6 +1,6 @@
 # F-Klubbens sangbog skreven i Typst
 
-A continuation of the old LaTeX sangbog](https://github.com/f-klubben/originalsangbog)
+A continuation of the old [LaTeX sangbog](https://github.com/f-klubben/originalsangbog)
 
 ## Req.
 
