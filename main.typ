@@ -10,7 +10,7 @@
 
 #fritfor
 
-#indholdfortegnelse(cols: 2)
+#indholdfortegnelse(cols: 2, block_height: 80%)
 
 #v(1cm)
 #align(center)[
@@ -157,7 +157,13 @@
 #pagebreak()
 
 // Alle DAT'er er emget glade for Mini
-#include "sange/miniblirbortført.typ"
+// Kontekts: Der var requestet at den ikke var med
+// Indtil at en sang kan være på plads 21, er den redacted
+#context[
+  #highlight(fill:black, top-edge: "bounds", bottom-edge: "bounds")[
+  #include "sange/miniblirbortført.typ"
+  ]
+]
 
 #v(-1em)
 // Veteranens nostalgiske vise (nyere version af FVJ variaent)

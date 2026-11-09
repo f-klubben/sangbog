@@ -45,9 +45,9 @@
   #omkvæd(inline: true)[_Det syder af fusel og ..._ ]
 
   #vers[
-    Hvis du har fået lyst til at smage det selv,
-    så kom kun til mig, helst når dag'n går på hæld,
-    slå 3 slag på ruden og stik mig en tier,
+    Hvis du har fået lyst til at smage det selv, \
+    så kom kun til mig, helst når dag'n går på hæld, \
+    slå 3 slag på ruden og stik mig en tier, \
     så får du en sjat af min livseliksir.
   ]
 
