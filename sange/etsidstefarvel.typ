@@ -7,7 +7,7 @@
   #vers[
     Her skal der lyde et højt #sc[HURRA] \
     til alle jer der blev kandidater \
-    og måske også 'Farvel herfra \u{2026} ' \
+    og måske også 'Farvel herfra ... ' \
     til de der ikk' blev stipendiater \
     Men der er jobs nok som man kan få \
     så tag det roligt (det #em[skal] jo gå) 
@@ -18,7 +18,7 @@
     for folk som jer der vil tjene kugler \
     og ikke nøjes med lav SU \
     og andre almisse-lige smuler \
-    Nu får I løn i hoved og i r.. \
+    Nu får I løn i hoved og i r... \
     så spring dog til og lad vær og tøv !
   ]
 
@@ -28,13 +28,13 @@
     som meget højtlønnet datalog  \
     og endte nederst i folkekøkken ?  \
     Næh, håndvægtens vægt bli'r nok ikk' et ton \
-    \- den bliver snarere $epsilon$
+    -- den bliver snarere $epsilon$
   ]
 
   #vers[
     På ST19 I lalled' rundt  \
     så i aviser og bælled' kaffe  \
-    \- men skæbnen ku' gøre meget ondt \
+    -- men skæbnen ku' gøre meget ondt \
     hvis til eksamen I blev lidt paffe  \
     Men det er slut nu - la' vær og tænk!  \
     (og glem den s..... til skolebænk)
@@ -57,7 +57,7 @@
     hvis man vil læse en smule pæd. \
     og ta' i skole med 4-toget \
     og sige $log x$ og cotangens \
-    (og måske 'dumpet' til lille Jens \u{2026}) 
+    (og måske 'dumpet' til lille Jens ...) 
   ]
 
   #vers[
@@ -66,7 +66,7 @@
     som går til plader med heavy-rock \
     nu hvor I står og er kandidater \
     Så her skal lyde et højt #underline[FARVEL]! \
-    Tag jeres tøj på og lev så vel \u{2026}
+    Tag jeres tøj på og lev så vel ...
   ]
 
   #note[

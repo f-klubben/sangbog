@@ -39,7 +39,7 @@
     #em[JEG' EN NØRD! \
     og er stolt af det!] \
     Og er stolt af det ! #h(1.5em)#small[\/\/ SV] \
-    Yeaaaah ..
+    Yeaaaah ...
   ]
 
   #csplit
@@ -76,7 +76,7 @@
 
     #em[JEG' EN NØRD! \
     og er stolt af det!] \
-    Jeg er stolt af de #h(1.5em)#small[\/\/ SV]\
+    Jeg er stolt af det #h(1.5em)#small[\/\/ SV]\
     Yeaah ...
   ]
 ]

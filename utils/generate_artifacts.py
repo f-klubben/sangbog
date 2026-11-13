@@ -1,8 +1,8 @@
+import base64
+import json
 import os
 import re
-import json
 import sys
-import base64
 from pathlib import Path
 
 CWD = Path.cwd()
@@ -45,16 +45,16 @@ JSON_PATH = CWD.joinpath("output/songs.json")
 FORMATTING_CONFIG: dict = {
     # ── Named command wrappers ─────────────────────────────────────────────
     "commands": {
-        "bf":      (r"{\bf{", "}"),   # bold
-        "sf":      (r"{\sf", "}"),   # sans-serif
-        "sl":      (r"{\sl", "}"),   # slanted
-        "sc":      (r"{\sc", "}"),   # small caps
-        "em":      (r"\textit{", "}"),   # emphasis / italic
-        "tt":      (r"{\tt", "}"),   # monospace
+        "bf":      (r"*", "*"),   # bold
+        "sf":      (r"sf{", "}"),   # sans-serif
+        "sl":      (r"_", "_"),   # slanted
+        "sc":      (r"sc{", "}"),   # small caps
+        "em":      (r"_", "_"),   # emphasis / italic
+        "tt":      (r"tt{", "}"),   # monospace
         "small":   ("", ""),   # smaller text
         "big":     ("", ""),   # bigger text
-        "strong":  (r"{\bf", "}"),   # strong / bold
-        "emph":    (r"\textit{", "}"),   # emphasis
+        "strong":  (r"*", "*"),   # strong / bold
+        "emph":    (r"_", "_"),   # emphasis
         "context": ("", ""),   # layout wrapper
         "super":   ("", ""),   # layout wrapper
     },
@@ -82,30 +82,31 @@ FORMATTING_CONFIG: dict = {
     #   "infinity": r"\infty",     # auto would give \infinity (wrong)
     #   "arrow.r":  r"\rightarrow",
     "math_symbol_map": {
-        "infinity": r"\infty",
-        "arrow.r":  r"\rightarrow",
-        "arrow.l":  r"\leftarrow",
-        "arrow.t":  r"\uparrow",
-        "arrow.b":  r"\downarrow",
-        "<=":       r"\leq",
-        ">=":       r"\geq",
-        "!=":       r"\neq",
-        "in":       r"\in",
-        "subset":   r"\subset",
-        "union":    r"\cup",
-        "sect":     r"\cap",
-        "times":    r"\times",
-        "dot":      r"\cdot",
-        "...":      r"\ldots",
-        "nabla":    r"\nabla",
+        "infinity": r"∞",
+        "arrow.r":  r"→",
+        "arrow.l":  r"←",
+        "arrow.t":  r"↑",
+        "arrow.b":  r"↓",
+        "<=":       r"≤",
+        ">=":       r"≥",
+        "!=":       r"≠",
+        "in":       r"∈",
+        "subset.eq":r"⊆",
+        "subset":   r"⊂",
+        "union":    r"∪",
+        "sect":     r"∩",
+        "times":    r"×",
+        "dot":      r"⋅",
+        "...":      r"…",
+        "nabla":    r"∇",
         "_a":    r"_{a}",
     },
 
     # ── Native Typst bold: *text* ─────────────────────────────────────────
-    "native_bold": (r"{\bf", "}"),
+    "native_bold": (r"*", "*"),
 
     # ── Native Typst italic: _text_ ───────────────────────────────────────
-    "native_italic": (r"\textit{", "}"),
+    "native_italic": (r"_", "_"),
 
     # ── Notes ─────────────────────────────────────────────────────────────
     "include_notes": False,
@@ -218,6 +219,17 @@ def parse_sang_header(content: str) -> tuple[str | None, str | None]:
 # LYRIC TEXT CLEANING
 # =============================================================================
 
+def strip_typst_comments(text: str) -> str:
+    """Remove Typst line and block comments while preserving line breaks."""
+    text = re.sub(r'//[^\n]*', '', text)
+    return re.sub(
+        r'/\*.*?\*/',
+        lambda match: ''.join(char for char in match.group(0) if char == '\n'),
+        text,
+        flags=re.DOTALL,
+    )
+
+
 def _apply_command_mapping(text: str, cmd: str) -> str:
     """
     Apply a named command mapping from FORMATTING_CONFIG to all occurrences
@@ -302,30 +314,46 @@ def clean_typst_text(text: str) -> str:
     Transform Typst markup in lyric text according to FORMATTING_CONFIG.
 
     Processing order:
-    1. Named command wrappers (#bf[...] etc.)  → prefix+content+suffix per config
-    2. #set ... lines                           → remove
-    3. #h(...) spacing                          → remove
-    4. $...$ inline math                        → prefix+content+suffix per config
-    5. Native *bold*                            → prefix+content+suffix per config
-    6. Native _italic_                          → prefix+content+suffix per config
-    7. #LaTeX                                   → "LaTeX"
-    8. Backslash line-break                     → newline
-    9. Remaining unknown #cmd                   → remove
-    10. Stray brackets from unwrapping          → remove
-    11. Collapse excess blank lines
+    1. Typst comments                           → remove
+    2. Named command wrappers (#bf[...] etc.)  → prefix+content+suffix per config
+    3. #set ... lines                           → remove
+    4. #h(...) spacing                          → remove
+    5. $...$ inline math                        → prefix+content+suffix per config
+    6. Native *bold*                            → prefix+content+suffix per config
+    7. Native _italic_                          → prefix+content+suffix per config
+    8. #LaTeX                                   → "LaTeX"
+    9. Backslash line-break                     → newline
+    10. Remaining unknown #cmd                  → remove
+    11. Stray brackets from unwrapping          → remove
+    12. Collapse excess blank lines
     """
-    # 1. Named command wrappers — process longest names first to avoid
+    # 1. Remove Typst comments before parsing markup.
+    text = strip_typst_comments(text)
+
+    # Typst '~' is a non-breaking space; preserve escaped '\~' literals.
+    text = re.sub(r'(?<!\\)~', ' ', text)
+
+    # Drop visual annotation blocks such as #text(fill: luma(100))[...].
+    text = re.sub(r'#text\s*\(.*?\)\s*\[[^]]*\]', '', text)
+
+    # Drop spaced vocal annotations such as #h(1.5em)#small[\/\/ SV].
+    text = re.sub(r'#h\s*\([^)]*\)\s*#small\s*\[[^]]*\]', '', text)
+
+    # Drop superscript annotation blocks such as #super[†].
+    text = re.sub(r'#super\s*\[[^]]*\]', '', text)
+
+    # 2. Named command wrappers — process longest names first to avoid
     #    partial matches (e.g. "strong" before "s")
     for cmd in sorted(FORMATTING_CONFIG["commands"], key=len, reverse=True):
         text = _apply_command_mapping(text, cmd)
 
-    # 2. Remove #set ... lines
+    # 3. Remove #set ... lines
     text = re.sub(r'#set\s+[^\n]*\n?', "", text)
 
-    # 3. Remove #h(...) horizontal spacing
+    # 4. Remove #h(...) horizontal spacing
     text = re.sub(r'#h\s*\([^)]*\)', "", text)
 
-    # 4. Stash math spans — must happen first so that _ and * inside $...$
+    # 5. Stash math spans — must happen first so that _ and * inside $...$
     #    are not consumed by the bold/italic regexes, and so that backslashes
     #    inside math are not eaten by the line-break sub.
     math_spans: list[str] = []
@@ -336,17 +364,17 @@ def clean_typst_text(text: str) -> str:
 
     text = re.sub(r'\$[^$]*\$', _stash_math, text)
 
-    # 5. Typst line-break: backslash at end of line
+    # 6. Typst line-break: backslash at end of line
     text = re.sub(r'\s*\\\s*\n', "\n", text)
 
-    # 6. Native bold/italic — safe now that math is stashed
+    # 7. Native bold/italic — safe now that math is stashed
     bold_pre, bold_suf = FORMATTING_CONFIG["native_bold"]
     text = re.sub(r'\*(.+?)\*', lambda m: f"{bold_pre}{m.group(1)}{bold_suf}", text)
 
     ital_pre, ital_suf = FORMATTING_CONFIG["native_italic"]
     text = re.sub(r'(?<!\\)_(\S.*?\S|\S)_', lambda m: f"{ital_pre}{m.group(1)}{ital_suf}", text)
 
-    # 7. Restore math, translate Typst identifiers to LaTeX, apply delimiters
+    # 8. Restore math, translate Typst identifiers to LaTeX, apply delimiters
     math_pre, math_suf = FORMATTING_CONFIG["math"]
     translate_mode = FORMATTING_CONFIG.get("math_translate", "auto")
     symbol_map = FORMATTING_CONFIG.get("math_symbol_map", {})
@@ -392,20 +420,20 @@ def clean_typst_text(text: str) -> str:
 
     text = re.sub(r'\x01MATH(\d+)\x01', _restore_math, text)
 
-    # 8. Named constants
+    # 9. Named constants
     text = re.sub(r'#LaTeX\b', "LaTeX", text)
 
-    # 9. Remove remaining unknown #word commands
+    # 10. Remove remaining unknown #word commands
     text = re.sub(r'#[A-Za-zÆæØøÅå]\w*\b', "", text)
 
-    # 10. Remove stray brackets left from unwrapping
+    # 11. Remove stray brackets left from unwrapping
     text = re.sub(r'\[', "", text)
     text = re.sub(r'\]', "", text)
 
-    # 11. Strip leading whitespace from each line (Typst source indentation)
+    # 12. Strip leading whitespace from each line (Typst source indentation)
     text = "\n".join(line.lstrip() for line in text.splitlines())
 
-    # 12. Collapse excess blank lines
+    # 13. Collapse excess blank lines
     text = re.sub(r'\n{3,}', "\n\n", text)
 
     return text.strip()
@@ -498,10 +526,11 @@ def get_song_body(content: str) -> list:
     """
     Parse a full .typ song file and return the body list:
 
-        verses   → (line_no, "v", text)
-        choruses → (line_no, "c", text)
-        images   → (line_no, "i", width, rel_path, base64_data)
+        verses   → (verse_index, "v", text)
+        choruses → (verse_index, "c", text)
+        images   → (verse_index, "i", width, rel_path, base64_data)
     """
+    content = strip_typst_comments(content)
     sang_match = re.search(r'#sang\(', content)
     if not sang_match:
         return []
@@ -526,17 +555,19 @@ def get_song_body(content: str) -> list:
 
     blocks = find_all_blocks(body_content)
     result = []
+    verse_index = 0
 
-    for line_no, btype, raw in blocks:
+    for _, btype, raw in blocks:
         if btype == "vers":
-            result.append((line_no, "v", clean_typst_text(raw)))
+            result.append((verse_index, "v", clean_typst_text(raw)))
+            verse_index += 1
 
         elif btype == "omkvæd":
-            result.append((line_no, "c", clean_typst_text(raw)))
+            result.append((verse_index, "c", clean_typst_text(raw)))
 
         elif btype == "note":
             if FORMATTING_CONFIG["include_notes"]:
-                result.append((line_no, "v", clean_typst_text(raw)))
+                result.append((verse_index, "v", clean_typst_text(raw)))
 
         elif btype == "image":
             # raw is the image path as written in source, e.g.
@@ -547,7 +578,7 @@ def get_song_body(content: str) -> list:
                 b64 = encode_image(image_path)
             except FileNotFoundError:
                 b64 = ""
-            result.append((line_no, "i", width, image_path, b64))
+            result.append((verse_index, "i", width, image_path, b64))
 
         # csplit / align are layout hints – skip
 

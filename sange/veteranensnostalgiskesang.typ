@@ -35,7 +35,7 @@
   #vers[
     Tænker på de fine F-klub-fester  \
     Ludo-kontester  \
-    \- nu er vi gæster  \
+    -- nu er vi gæster  \
     Når jeg kommer her er jeg en fremmed,  \
     har jeg fornemmet,  \
     det er lidt hårdt  \
