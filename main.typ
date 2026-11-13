@@ -1,7 +1,7 @@
 #import "template.typ": *
 
 #show: songbook.with(
-    title: "F-Klubbens Fabelagtige Sangbog"
+  title: "F-Klubbens Fabelagtige Sangbog",
 )
 
 //#set block(stroke: 2pt + red)
@@ -14,7 +14,7 @@
 
 #v(1cm)
 #align(center)[
-    #image("assets/foret.png", width: 100%)
+  #image("assets/foret.png", width: 100%)
 ]
 #pagebreak()
 
@@ -24,10 +24,10 @@
 
 // Gammel forside (ikke en forside her)
 #place(
-    center + bottom,
-    dx: 0cm,
-    dy: 0cm,
-    image("assets/fklub-sange-forside.png", width: 70%),
+  center + bottom,
+  dx: 0cm,
+  dy: 0cm,
+  image("assets/fklub-sange-forside.png", width: 70%),
 )
 
 // Futlandia
@@ -41,8 +41,8 @@
 #pagebreak()
 
 // Tegning af Rudin
-#align(center+horizon)[
-    #image("assets/rudin.png", width: 70%)
+#align(center + horizon)[
+  #image("assets/rudin.png", width: 70%)
 ]
 
 #pagebreak()
@@ -83,10 +83,10 @@
 
 // Franskbrød billede
 #place(
-    center,
-    dx: 0cm,
-    dy: 3.25cm,
-    image("assets/franskbrod.png", width: 8cm),
+  center,
+  dx: 0cm,
+  dy: 3.25cm,
+  image("assets/franskbrod.png", width: 8cm),
 )
 
 // Fredagsfranskbrød
@@ -102,10 +102,10 @@
 #include "sange/dumåfåminccompilernårjegdør.typ"
 
 #place(
-    right,
-    dx: 0cm,
-    dy: -4cm,
-    image("assets/amiga.png", width: 5cm),
+  right,
+  dx: 0cm,
+  dy: -4cm,
+  image("assets/amiga.png", width: 5cm),
 )
 
 // Danskens sande glæade (tal/mad sangen)
@@ -119,8 +119,8 @@
 
 
 // Tegning af Sofa Fra F-nüt
-#align(center+horizon)[
-    #image("assets/fnut-sofa.png", width: 110%)
+#align(center + horizon)[
+  #image("assets/fnut-sofa.png", width: 110%)
 ]
 
 #pagebreak()
@@ -137,10 +137,10 @@
 #pagebreak()
 
 #place(
-    center+bottom,
-    dx: 0cm,
-    dy: 0cm,
-    image("assets/øre.png", width: 7cm),
+  center + bottom,
+  dx: 0cm,
+  dy: 0cm,
+  image("assets/øre.png", width: 7cm),
 )
 
 // Jeg en nørd (Pokémon)
@@ -174,8 +174,7 @@
 
 // Halvejs kylling
 #place(
-  right
-  +bottom,
+  right + bottom,
   dx: 0cm,
   dy: 0cm,
   image("assets/halvejs.png", width: 5cm),
@@ -187,17 +186,18 @@
 
 #pagebreak()
 
-// CLRS 
+// CLRS
 #include "sange/clrs.typ"
 
 // Drunken BoAnd
 #include "sange/drunkenboand.typ"
 
+
 #pagebreak()
 
 // Tegning af eksamens-angst
-#align(center+horizon)[
-    #image("assets/eksamens-angst.png", width: 90%)
+#align(center + horizon)[
+  #image("assets/eksamens-angst.png", width: 90%)
 ]
 
 #pagebreak()
@@ -215,7 +215,7 @@
 
 // Kvindelig eksaminstor
 #place(
-  right+horizon,
+  right + horizon,
   dx: .5cm,
   dy: 0cm,
   image("assets/eksaminator.png", width: 6cm),
@@ -232,10 +232,13 @@
 // BoAnd Krabebsangen
 #include "sange/krabbeboand.typ"
 
+#include "sange/vierpåvejstrandvej.typ"
+
+
 #pagebreak()
 
 #place(
-  center+bottom,
+  center + bottom,
   dx: 0cm,
   dy: 1cm,
   image("assets/eksamen.png", width: 100%),
@@ -308,7 +311,7 @@
 
 #include "sange/unsorted/dervarenskikkeligbondemand.typ"
 
-#align(center)[#image("assets/eps2png/bondemand.png", width: 12cm)]
+// #align(center)[#image("assets/eps2png/bondemand.png", width: 12cm)]
 
 #pagebreak()
 
@@ -348,7 +351,7 @@
 #include "sange/unsorted/hvalenhvalborg.typ"
 
 #align(center)[
-    #image("assets/eps2png/calvinandhobbes.png", width: 80%)
+  // #image("assets/eps2png/calvinandhobbes.png", width: 80%)
 ]
 
 #include "sange/unsorted/joanna.typ"
@@ -413,7 +416,7 @@
 // K sektion
 #nynummerpræfiks("K")
 
-#kapitelside(titel: "Grå Sange", asset: "assets/eps2png/sex.png")
+// #kapitelside(titel: "Grå Sange", asset: "assets/eps2png/sex.png")
 #pagebreak()
 
 #include "sange/unsorted/enmandfaldtnedfraførstesal.typ"
