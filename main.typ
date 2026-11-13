@@ -280,6 +280,12 @@
 // F-nüt 1985 f-klub-sangkonkurence - hold 3
 //#include "sange/fnut1985rossethold3.typ"
 
+#pagebreak()
+
+// Cassiopia (Nørdens sang)
+#include "sange/deterderjegernørd.typ"
+
+
 #nynummerpræfiks("F")
 
 #kapitelside(titel: [Sange fra verden \ #text(size: .8em)[og om lejerbålet]], asset: "assets/verden.png", spacing: 1cm)
