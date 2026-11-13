@@ -272,16 +272,13 @@
 // F-nüt 1985 f-klub-sangkonkurence - vindersangen
 #include "sange/fnut1985vindersangen.typ"
 
-#pagebreak()
-
+//#pagebreak() // disablede hele siden, da sangene nok ikke kommer til at blive sunget
 // F-nüt 1985 f-klub-sangkonkurence - hold 1
-#include "sange/fnut1985rossethold1.typ"
-
+//#include "sange/fnut1985rossethold1.typ"
 // F-nüt 1985 f-klub-sangkonkurence - hold 2
-#include "sange/fnut1985rossethold2.typ"
-
+//#include "sange/fnut1985rossethold2.typ"
 // F-nüt 1985 f-klub-sangkonkurence - hold 3
-#include "sange/fnut1985rossethold3.typ"
+//#include "sange/fnut1985rossethold3.typ"
 
 #nynummerpræfiks("F")
 
