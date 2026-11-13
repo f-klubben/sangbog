@@ -7,7 +7,7 @@
     Kære unge venner på Mat 1 ! \
     Jeres nye studium blir #em[fedt], \
     I får kaffekrus og bajervom \
-    - det skal I nu høre mere om!
+    -- det skal I nu høre mere om!
   ]
 
   #vers[
@@ -42,7 +42,7 @@
 
   #vers[
     Til debat der skal der være tid ... \
-    \- så får faget meget mere BID ... \
+    -- så får faget meget mere BID ... \
     På Dat 3 er der filosofi \
     og talløse artikler
   ]
@@ -58,6 +58,6 @@
     Der er BBK og PDV, \
     JS, AaN, AD og SLB, \
     PSE, MR og KGL \
-    \- resten kan I sikkert huske selv!
+    -- resten kan I sikkert huske selv!
   ]
 ]

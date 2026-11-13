@@ -27,7 +27,7 @@
   #omkvæd[
     Og lidt om en Dry Stout, Pilsner og Lambic \
     Og Triple og Classic, Pale Ale og Bock \
-    For uden IPA, Stout og en Witbier  \
+    For uden IPA, Stout og en Witbier \
     Og Weizen og Märzen-Bock, Saison og Schwarz
   ]
 

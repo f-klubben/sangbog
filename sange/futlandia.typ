@@ -55,7 +55,7 @@
   #note[
     #small[
     Noget man kan synge imellem vers: \
-    #h(2em) _||: Kom for kaffe, en øl og lidt snak.Det lyder godt :||_
+    #h(2em) _||: Kom for kaffe, en øl og lidt snak. Det lyder godt :||_
     \
     † og ansatte! ]
   ]

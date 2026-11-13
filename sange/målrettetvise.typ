@@ -30,7 +30,7 @@
     og glemte langsomt sit barnesind \
     #context[#set par(spacing: 0.9em, leading: 0.5em)
     #tt[#small[Han~læste~standards~og~manualer]] \
-    #tt[#small[og~gamle~Yourdon~(for~han~var~go')]]  \
+    #tt[#small[og~gamle~Yourdon~(for~han~var~go')]] \
     #tt[#small[og~ingeniører~har~ingen~kvaler]] \
     #tt[#small[med~sorte~mapper~og~spidse~sko]]]
   ]
@@ -41,11 +41,11 @@
     Han blev forgabt i en dejlig pige \
     men indså snart at det ikke gik \
     Han vidste sjældent hvad han sku' sige \
-    \- den skønne elsked' jo mest fysik \
+    -- den skønne elsked' jo mest fysik \
     #sc[Hun tilbad $nabla$ og integraler \
     og laserstrålen (for den er go') \
     (Kun hr. Curie havde aldrig kvaler \
-    med viskestykker og hjemmesko \u{2026})]
+    med viskestykker og hjemmesko ...)]
   ]
 
   #vers[
@@ -54,7 +54,7 @@
     for når på værtshus han gav en omgang, \
     ja, så forkyndte han for enhver: \
     #sl['Skråt op med $nabla$ og integraler!] \ // Hvis du er forundret
-    #sl[til H\u{2026} med Yourdon, den demagog!] \ // Rør det ikke
+    #sl[til H... med Yourdon, den demagog!] \ // Rør det ikke
     #sl[Vi dataloger går i sandaler] \
     #sl[og trækker #em[aldrig] i spidse sko']
   ]
@@ -63,7 +63,7 @@
     O, stolte broder! den dag oprinder \
     hvor du til sidst bliver kandidat \
     og i et firma vi snart dig finder \
-    men du har hurtigt et svar parat:  \
+    men du har hurtigt et svar parat: \
     #em['Hvem bruger $nabla$ og integraler ? \
     Jeg programmerer, for jeg er go' \
     Jeg er så glad for hvad de betaler \

@@ -5,8 +5,8 @@
 #sang("Julemad og drikke---dur for nissen ikke", subtext: "Finn Verner Jensen (FVJ) - Mel: På loftet sidder nissen", cols: 2)[
   #vers[
     På loftet sidder nissen med sin julemad, \
-    et mægtigt fad---den gamle rad. \
-    Han hikker og han fiser---ja, det er en skam, \
+    et mægtigt fad -- den gamle rad. \
+    Han hikker og han fiser -- ja, det er en skam, \
     at julemaden ej er noget for ham. \
     Men rundt omkring står alle de små rotter, \
     og de skotter, og de skotter, \
@@ -30,7 +30,7 @@
     Det sidste nissen spiser, er sin julegrød, \
     så hvid og sød, og saften rød. \
     Saft med polyvinylchlorid i halsen flød, \
-    han stivner brat---og så er han død. \
+    han stivner brat -- og så er han død. \
     Men rotterne de rikker, og de rakker, \
     de pikker, og de pakker, \
     de putter nissen i den store hakker: \
