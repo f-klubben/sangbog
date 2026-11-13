@@ -1,8 +1,8 @@
+import base64
+import json
 import os
 import re
-import json
 import sys
-import base64
 from pathlib import Path
 
 CWD = Path.cwd()
@@ -329,6 +329,18 @@ def clean_typst_text(text: str) -> str:
     """
     # 1. Remove Typst comments before parsing markup.
     text = strip_typst_comments(text)
+
+    # Typst '~' is a non-breaking space; preserve escaped '\~' literals.
+    text = re.sub(r'(?<!\\)~', ' ', text)
+
+    # Drop visual annotation blocks such as #text(fill: luma(100))[...].
+    text = re.sub(r'#text\s*\(.*?\)\s*\[[^]]*\]', '', text)
+
+    # Drop spaced vocal annotations such as #h(1.5em)#small[\/\/ SV].
+    text = re.sub(r'#h\s*\([^)]*\)\s*#small\s*\[[^]]*\]', '', text)
+
+    # Drop superscript annotation blocks such as #super[†].
+    text = re.sub(r'#super\s*\[[^]]*\]', '', text)
 
     # 2. Named command wrappers — process longest names first to avoid
     #    partial matches (e.g. "strong" before "s")
