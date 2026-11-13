@@ -1,0 +1,11 @@
+#import "//template.typ": *
+
+#sang("Min far bruger Windows", subtext: "Mel: Min far han er bager", cols: 1)[
+  #vers[
+    Min far bruger Windows, \
+    Og han skriver .NET og WinForms til byen, \
+    Det' derfor jeg bruger proprietær kod', det' et hæsseligt syn, \
+    For hvad skal jeg med Outlook og Excel og Teams, \
+    Når jeg hellere vil bruge en Linux maskin'?
+  ]
+]
