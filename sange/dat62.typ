@@ -18,8 +18,8 @@
     Ja ja ja ja ja - det må vi gerne\
     \
     Ørhn Ørhn hent hent skål skål spy spy \
-    toogtredshavlfirs hent skål skål spy spy \
-    \- det var flot! \
+    toogtredshavlfirs hent skål spy spy \
+    -- det var flot! \
     \
     Ja det må vi godt!
   ]
