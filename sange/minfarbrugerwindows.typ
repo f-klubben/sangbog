@@ -1,6 +1,6 @@
 #import "//template.typ": *
 
-#sang("Min far bruger Windows", subtext: "Vincent Kosteyev Bechmann, 2026 - Mel: Min far han er bager", cols: 1)[
+#sang("Min far bruger Windows", subtext: "Mel: Min far han er bager", cols: 1)[
   #vers[
     Min far bruger Windows, \
     Og han skriver dotnet og winforms til byen, \
