@@ -24,7 +24,7 @@ git clone https://github.com/f-klubben/ftsangbog.git
 sudo apt install typst imagemagick curl unzip python3
 
 #Arch
-sudo pacman -S typst imagemagick curl unzip pyhton
+sudo pacman -S typst imagemagick curl unzip python ghostscript
 ``` 
 4. Build the sangbog make `kontinuertpdf` for non-booklet (continuous) format, `make bookletpdf` for booklet format. (Fonts downlaod automatically).
 
